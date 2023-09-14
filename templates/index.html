@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <section class="bg-white dark:bg-gray-900">
+      <div
+        class="grid py-8 px-4 mx-auto max-w-screen-xl h-screen lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+      >
+        <div class="place-self-center mr-auto lg:col-span-7">
+          <h1
+            class="mb-4 max-w-2xl text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
+          >
+            Get your CSV formatted data
+          </h1>
+          <p
+            class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+          >
+            Kindly select your choice list and Click the Get Data button to
+            download a csv file of the all the contacts on that list. 🤗
+          </p>
+          <form action="{{url_for('download_file')}}" , method="post">
+            <div class="mb-6 grid gap-4 grid-cols-3 grid-rows-3">
+              {% for label in labels %}
+              <div class="flex items-center mb-4">
+                <input
+                  id="radio-label"
+                  type="radio"
+                  value="{{label.id}}"
+                  name="radio-label"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  required
+                />
+                <label
+                  for="radio-label"
+                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >{{ label.name }}</label
+                >
+              </div>
+              {% endfor %}
+            </div>
+            <button type="submit">
+              <a
+                class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 cursor-pointer"
+              >
+                Get data
+                <svg
+                  class="ml-2 -mr-1 w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </a>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
