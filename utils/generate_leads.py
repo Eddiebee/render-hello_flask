@@ -114,7 +114,7 @@ def get_leads(label_id: str):
     # we'll be using the chunk mechanism for optimization
     CHUNKSIZE = 1000
 
-    chunks = pd.read_csv('new_leads.csv', chunksize=CHUNKSIZE)
+    chunks = pd.read_csv('prospective_leads.csv', chunksize=CHUNKSIZE)
     data_chunks = pd.concat(chunks)
 
     data = data_chunks.to_dict('records')
