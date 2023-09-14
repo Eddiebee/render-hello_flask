@@ -4,8 +4,9 @@ import os
 
 import time
 import csv
+import pandas as pd
 
-from utils.get_leads_list  import  get_leads_list
+from utils.get_leads_list import get_leads_list
 
 
 def get_leads(label_id: str):
@@ -92,23 +93,40 @@ def get_leads(label_id: str):
 
     # we are using this new pattern to reduce query time and load time.
     leads_list = []
-    with open('prospective_leads.csv', 'r') as file:
-        reader = csv.reader(file)
-        data = list(reader)
+    # with open('prospective_leads.csv', 'r') as file:
+    #     reader = csv.reader(file)
+    #     data = list(reader)
 
-    # transform data to expected format
-    data.pop(0)
+    # # transform data to expected format
+    # data.pop(0)
+
+    # for d in data:
+    #     # we have 5 columns
+    #     leads_list.append({
+    #         "organization_id": d[1],
+    #         "organization_title": d[2],
+    #         "lead_name": d[3],
+    #         "lead_title":  d[4]
+    #     })
+
+    # optimize leads generation process
+
+    # we'll be using the chunk mechanism for optimization
+    CHUNKSIZE = 1000
+
+    chunks = pd.read_csv('new_leads.csv', chunksize=CHUNKSIZE)
+    data_chunks = pd.concat(chunks)
+
+    data = data_chunks.to_dict('records')
 
     for d in data:
         # we have 5 columns
         leads_list.append({
-            "organization_id": d[1],
-            "organization_title": d[2],
-            "lead_name": d[3],
-            "lead_title":  d[4]
+            "organization_id": d["organization_id"],
+            "organization_title": d["organization_title"],
+            "lead_name": d["lead_name"],
+            "lead_title":  d["lead_title"]
         })
-
-    # leads_list = get_leads_list()
 
     # connect contacts to leads
     contacts_with_leads = []
