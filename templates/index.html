@@ -20,7 +20,7 @@
             class="mb-6 max-w-2xl font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
           >
             Kindly select your choice list and Click the Get Data button to
-            download a csv file of the all the contacts on that list. 🤗
+            download a csv file of all the contacts on that list. 🤗
           </p>
           <form action="{{url_for('download_file')}}" , method="post">
             <div class="mb-6 grid gap-4 grid-cols-3 grid-rows-3">
@@ -42,7 +42,7 @@
               </div>
               {% endfor %}
             </div>
-            <button type="submit" disabled="{{ loading }}">
+            <button type="submit" disabled="{{ false }}">
               <a
                 class="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none cursor-pointer"
               >
