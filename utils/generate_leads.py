@@ -130,22 +130,21 @@ def get_leads(label_id: str):
 
     # connect contacts to leads
     contacts_with_leads = []
-    choice_leads = []
+    choice_leads = {}
 
     for i, contact in enumerate(contacts_list):
         for lead in leads_list:
             if lead.get("lead_name") != contact.get("Name") and lead.get("organization_id") == contact.get("Company Id"):
-                choice_leads.append({i: lead})
+                choice_leads.update({i: lead})
 
-    for choice_lead in choice_leads:
-        for choice_lead_key, choice_lead_value in choice_lead.items():
-            contacts_with_leads.append({"Name": contacts_list[choice_lead_key].get("Name"),
-                                        "Title": contacts_list[choice_lead_key].get("Title"),
-                                        "Email": contacts_list[choice_lead_key].get("Email"),
-                                        "Company": contacts_list[choice_lead_key].get("Company"),
-                                        "Company Website": contacts_list[choice_lead_key].get("Company website"),
-                                        "Leads' Name": choice_lead_value["lead_name"],
-                                        "Leads' Title": choice_lead_value["lead_title"]})
+    for choice_lead_key, choice_lead_value in choice_leads.items():
+        contacts_with_leads.append({"Name": contacts_list[choice_lead_key].get("Name"),
+                                    "Title": contacts_list[choice_lead_key].get("Title"),
+                                    "Email": contacts_list[choice_lead_key].get("Email"),
+                                    "Company": contacts_list[choice_lead_key].get("Company"),
+                                    "Company Website": contacts_list[choice_lead_key].get("Company website"),
+                                    "Leads' Name": choice_lead_value["lead_name"],
+                                    "Leads' Title": choice_lead_value["lead_title"]})
 
     # write files to csv
     ts = time.time()
