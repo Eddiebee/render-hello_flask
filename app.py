@@ -10,9 +10,6 @@ app = Flask(__name__)
 # load the environment variables from the .env file
 load_dotenv()
 
-# attempt to add loading state to button
-loading = False
-
 
 @app.route('/')
 def home():
@@ -39,10 +36,7 @@ def home():
 def download_file():
     label_id = request.form['radio-label']
     try:
-        global loading
-        loading = True
         _, filename = get_leads(label_id=label_id)
-        loading = False
     except requests.exceptions.HTTPError as err:
         print("HTTP Error")
         print(err.args[0])
