@@ -29,7 +29,7 @@ def home():
 
     labels = response.json()
 
-    return render_template('index.html', labels=labels, loading=loading)
+    return render_template('index.html', labels=labels)
 
 
 @app.route('/download_file', methods=['POST'])
